@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -12,12 +13,12 @@ app.use(bodyParser.json());
 
 // basic routes
 app.get('/', (req, res) => {
-  res.send('Bienvenido a la API de gestión de usuarios!');
+  res.send('Welcome to user manage api');
 });
 
 // start server
 app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
 
 // sync models
