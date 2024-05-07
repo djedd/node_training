@@ -12,6 +12,7 @@ const createUser = async (req, res) => {
 };
 
 const getAllUsers = async (req, res) => {
+    console.log("entro!")
     const cacheKey = 'allUsers';
     let users = myCache.get(cacheKey);
 
