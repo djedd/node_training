@@ -8,6 +8,7 @@ const schema = require('./graphql/schema');
 
 const app = express();
 const port = process.env.PORT || 3001;
+const url = process.env.URL || 'localhost';
 
 // Middlewares
 applyMiddlewares(app);
@@ -33,7 +34,7 @@ const startServer = async () => {
       server.applyMiddleware({ app });
       await connectDB(); // Ensure DB is connected and synced before starting the server
       app.listen(port, () => {
-          console.log(`Server running on http://localhost:${port}`);
+          console.log(`Server running on http://${url}:${port}`);
       });
   } catch (err) {
       console.error('Failed to start the server:', err);
@@ -42,3 +43,4 @@ const startServer = async () => {
 
 startServer();
 
+module.exports = app;
