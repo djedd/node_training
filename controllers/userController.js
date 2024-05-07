@@ -1,8 +1,9 @@
 const User = require('../models/User');
-const myCache = require('../cache');
+const myCache = require('../utils/cache');
 
 const createUser = async (req, res) => {
     try {
+        console.log(req.body)
         const user = await User.create(req.body);
         res.json(user);
     } catch (error) {

@@ -1,35 +1,35 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const { applyMiddlewares } = require('./middlewares');
+const { connectDB } = require('./config/database');
+const userRoutes = require('./routes/userRoutes');
+
 const app = express();
 const port = process.env.PORT || 3001;
-const userRoutes = require('./routes/userRoutes');
-const sequelize = require('./config/database');
 
-// middlewares
-app.use(cors());
-app.use(bodyParser.json());
+// Middlewares
+applyMiddlewares(app);
 
-// basic routes
+// Basic routes
 app.get('/', (req, res) => {
   res.send('Welcome to user manage api');
 });
 
-// start server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
-
-// sync models
-sequelize.authenticate()
-    .then(() => {
-        console.log('Conexión establecida exitosamente.');
-        
-        return sequelize.sync();
-    })
-    .catch(err => {
-        console.error('No se pudo conectar a la base de datos:', err);
-    });
-
+// Routes
 app.use('/api', userRoutes);
+
+
+// Start server
+const startServer = async () => {
+  try {
+      await connectDB(); // Ensure DB is connected and synced before starting the server
+      app.listen(port, () => {
+          console.log(`Server running on http://localhost:${port}`);
+      });
+  } catch (err) {
+      console.error('Failed to start the server:', err);
+  }
+};
+
+startServer();
+
