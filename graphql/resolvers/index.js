@@ -1,5 +1,5 @@
-const { merge } = require('lodash');
-const userResolvers = require('./userResolvers');
+const { merge } = require("lodash");
+const userResolvers = require("./userResolvers");
 
 const baseResolvers = {
   Query: {

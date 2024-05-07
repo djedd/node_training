@@ -1,4 +1,4 @@
-const User = require('../../models/User'); // Asegúrate de tener un modelo de usuario
+const User = require("../../models/User"); // Asegúrate de tener un modelo de usuario
 
 const userResolvers = {
   Query: {
@@ -8,7 +8,7 @@ const userResolvers = {
         const users = await User.findAll();
         return users;
       } catch (error) {
-        throw new Error('Error fetching users');
+        throw new Error("Error fetching users");
       }
     },
     // Get user by ID resolver
@@ -16,11 +16,11 @@ const userResolvers = {
       try {
         const user = await User.findByPk(id);
         if (!user) {
-          throw new Error('User not found');
+          throw new Error("User not found");
         }
         return user;
       } catch (error) {
-        throw new Error('Error fetching user');
+        throw new Error("Error fetching user");
       }
     },
   },
@@ -31,7 +31,7 @@ const userResolvers = {
         const user = await User.create(input);
         return user;
       } catch (error) {
-        throw new Error('Error creating user');
+        throw new Error("Error creating user");
       }
     },
     // Update user mutation
@@ -39,15 +39,15 @@ const userResolvers = {
       try {
         const user = await User.findByPk(id);
         if (!user) {
-          throw new Error('User not found');
+          throw new Error("User not found");
         }
         const updatedUser = await user.update(input);
         return updatedUser;
       } catch (error) {
-        throw new Error('Error updating user');
+        throw new Error("Error updating user");
       }
     },
-  }
+  },
 };
 
 module.exports = userResolvers;
